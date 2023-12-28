@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "268425098580",
+    "firebase_url": "https://smart-hospital-7a180-default-rtdb.firebaseio.com",
+    "project_id": "smart-hospital-7a180",
+    "storage_bucket": "smart-hospital-7a180.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268425098580:android:2647d38b71aafb953204c1",
+        "android_client_info": {
+          "package_name": "com.example.smart_hospital"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5RTrmJuBvxq_JLfEM2mOcEXe28VBl_6g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
