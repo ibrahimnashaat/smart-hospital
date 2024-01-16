@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smart_hospital/layout_pages/Likes/Likes.dart';
 import 'package:smart_hospital/layout_pages/main_home/home.dart';
-import 'package:smart_hospital/layout_pages/message/message.dart';
 import 'package:smart_hospital/layout_pages/payment/booking_details.dart';
 
+import '../chat_text_message/message/message.dart';
 import 'home_states.dart';
 
 

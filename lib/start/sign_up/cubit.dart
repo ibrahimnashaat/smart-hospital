@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smart_hospital/sign_up/states.dart';
+import 'package:smart_hospital/shared/class_user_model.dart';
+import 'package:smart_hospital/start/sign_up/states.dart';
 
-import '../class_user_model.dart';
 import '../login/login_model.dart';
 
 

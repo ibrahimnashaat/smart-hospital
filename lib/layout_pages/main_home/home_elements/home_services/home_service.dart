@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_hospital/cach_helper/cach_helper.dart';
-import 'package:smart_hospital/colors.dart';
-import 'package:smart_hospital/shared/shared.dart';
+import 'package:smart_hospital/shared/cach_helper/cach_helper.dart';
 
-import '../layout_pages/home_cubit.dart';
-import '../layout_pages/layout.dart';
-import '../user_profile/user_profile_cubit.dart';
+import 'package:smart_hospital/shared/colors.dart';
+
+import '../../../layout.dart';
+import '../../home_cubit.dart';
+
 
 class HomeService extends StatelessWidget{
   const HomeService({super.key});
@@ -106,10 +106,7 @@ Widget mainWidgetInThisPage (
   padding: const EdgeInsets.all(20),
   child: InkWell(
     onTap: (){
-      // UserProfileCubit.get(context).changeShowInChatPage2(
-      //   model: "zXree2DBHZV0Nd6cnUWhyyG3UHu2",
-      //   showInChatPage: true,
-      // );
+
 
       cachHelper.saveData(key: 'doctor4', value: 3);
 

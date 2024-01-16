@@ -2,13 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_hospital/cach_helper/cach_helper.dart';
-import 'package:smart_hospital/colors.dart';
+import 'package:smart_hospital/shared/cach_helper/cach_helper.dart';
 
-import '../../shared/shared.dart';
-import '../layout_pages/home_cubit.dart';
-import '../layout_pages/layout.dart';
-import '../user_profile/user_profile_cubit.dart';
+import 'package:smart_hospital/shared/colors.dart';
+
+import '../../../../shared/shared.dart';
+import '../../../layout.dart';
+import '../../home_cubit.dart';
+
 
 class Pharmacy extends StatelessWidget{
   const Pharmacy({super.key});
@@ -152,10 +153,6 @@ Widget mainWidgetInThisPage(
 }
     )=>InkWell(
   onTap: (){
-    // UserProfileCubit.get(context).changeShowInChatPage2(
-    //   model: "oVhPBjNuSCWBGnlOGjfXc04lPHx2",
-    //   showInChatPage: true,
-    // );
 
     cachHelper.saveData(key: 'doctor5', value: 4);
 

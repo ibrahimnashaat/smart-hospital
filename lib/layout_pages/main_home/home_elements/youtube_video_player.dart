@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:smart_hospital/colors.dart';
+import 'package:smart_hospital/shared/colors.dart';
 import 'package:smart_hospital/layout_pages/layout.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import 'home.dart';
+import '../home.dart';
 
 class MyYoutubePlayer extends StatefulWidget {
   final String url;

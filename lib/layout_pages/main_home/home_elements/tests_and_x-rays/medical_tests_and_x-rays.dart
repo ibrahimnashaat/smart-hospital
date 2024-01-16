@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_hospital/cach_helper/cach_helper.dart';
-import 'package:smart_hospital/colors.dart';
+import 'package:smart_hospital/shared/cach_helper/cach_helper.dart';
+import 'package:smart_hospital/shared/colors.dart';
 
-import '../../shared/shared.dart';
-import '../layout_pages/home_cubit.dart';
-import '../layout_pages/layout.dart';
-import '../user_profile/user_profile_cubit.dart';
+import '../../../../shared/shared.dart';
+import '../../../layout.dart';
+import '../../home_cubit.dart';
+
+
 
 class XRaysPage extends StatelessWidget{
   const XRaysPage({super.key});
@@ -129,10 +130,7 @@ class XRaysPage extends StatelessWidget{
    padding: const EdgeInsets.all(20.0),
    child: InkWell(
      onTap: (){
-       // UserProfileCubit.get(context).changeShowInChatPage2(
-       //   model: "mM9UopgU2dWHvcKVLNrlPB4ujj93",
-       //   showInChatPage: true,
-       // );
+
 
        cachHelper.saveData(key: 'doctor6', value: 5);
 

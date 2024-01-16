@@ -1,6 +1,4 @@
 dynamic uId = '';
-const stripePublishableKey = "pk_test_51ONba8Bm2qbfDbrgqoqxBSNkaA4Cqinm4R8A7KZBLOYgTv1Eflg0DhD5qj2lRcPzonsigbxX7aQAzL9UwKQ0xliQ00u8hH3mFH";
-
-const int appId= 2005922202;
-const String appSignInId='d081f967184a97db46e2cee37f0a77bfc77e242a2bc57502a1988fbb284e4281' ;
+const int appId= 109762425;
+const String appSignInId='559c27e8234869c312c343d3aa77f7e54864b9250aa58e40d274bb7aa4a464ee' ;
 

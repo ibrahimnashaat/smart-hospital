@@ -2,13 +2,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_hospital/cach_helper/cach_helper.dart';
-import 'package:smart_hospital/colors.dart';
-import 'package:smart_hospital/layout_pages/layout.dart';
-import 'package:smart_hospital/user_profile/user_profile_cubit.dart';
-import 'package:smart_hospital/user_profile/user_profile_states.dart';
 
-import '../login/login.dart';
+import 'package:smart_hospital/shared/cach_helper/cach_helper.dart';
+import 'package:smart_hospital/shared/colors.dart';
+import 'package:smart_hospital/layout_pages/layout.dart';
+
+
+import '../../../../start/login/login.dart';
+import 'user_profile_cubit.dart';
+import 'user_profile_states.dart';
+
 
 class UserProfile extends StatelessWidget {
    UserProfile({Key? key}) : super(key: key);

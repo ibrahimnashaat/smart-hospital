@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../colors.dart';
+import 'colors.dart';
 
 Widget textFormField({
   bool? obscureText ,
@@ -82,35 +82,3 @@ Widget textFormField({
 
 
 
-Widget   mainButton (
-{
-  required BuildContext context,
-  double? width,
-  double? height,
-  Color? backgroundColor,
-  Color? textColor,
-  double? textFontSize,
-  required String text,
-  required Function function,
-}
-    )=> Container(
-  width: width ?? double.infinity,
-  height:height ?? MediaQuery.of(context).size.height*0.06,
-  child: MaterialButton(
-    shape: RoundedRectangleBorder(
-        borderRadius:
-        BorderRadius.circular(15.0),
-        side:
-        BorderSide(color: Colors.white24)),
-    onPressed: function(),
-    color: backgroundColor ?? mainColor,
-    textColor: Theme.of(context)
-        .scaffoldBackgroundColor,
-    child: Text(text??'',
-      style: TextStyle(
-          color: textColor ?? secondaryColor,
-          fontSize: textFontSize ?? 16.sp,
-          fontWeight: FontWeight.bold
-      ),
-    ),),
-);

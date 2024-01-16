@@ -6,13 +6,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:smart_hospital/user_profile/user_profile_states.dart';
-import '../class_user_model.dart';
-
-
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
+import '../../../../shared/class_user_model.dart';
 import 'doctor_model.dart';
+import 'user_profile_states.dart';
 
 class UserProfileCubit extends Cubit<UserProfileStates> {
   UserProfileCubit() : super(UserProfileInitialStates());

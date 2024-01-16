@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_hospital/cach_helper/cach_helper.dart';
-import 'package:smart_hospital/colors.dart';
+import 'package:smart_hospital/shared/cach_helper/cach_helper.dart';
+import 'package:smart_hospital/shared/colors.dart';
 
 import 'login/login.dart';
+
 
 class StartPage extends StatelessWidget{
   const StartPage({super.key});

@@ -3,9 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_hospital/cach_helper/cach_helper.dart';
-import 'package:smart_hospital/colors.dart';
-import '../layout_pages/home_cubit.dart';
+import 'package:smart_hospital/shared/cach_helper/cach_helper.dart';
+import 'package:smart_hospital/shared/colors.dart';
+
+import '../../home_cubit.dart';
 import '../user_profile/doctor_model.dart';
 import '../user_profile/user_profile_cubit.dart';
 import '../user_profile/user_profile_states.dart';
@@ -200,7 +201,7 @@ class _FindDoctorsState extends State<FindDoctors> {
 
                       ),
 
-                      itemCount: filteredDoctors.length  ,
+                      itemCount: 3  ,
 
                       physics: BouncingScrollPhysics(),
                     ),

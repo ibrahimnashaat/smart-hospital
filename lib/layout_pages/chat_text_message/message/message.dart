@@ -3,20 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_hospital/cach_helper/cach_helper.dart';
-import 'package:smart_hospital/user_profile/user_profile_cubit.dart';
-import 'package:smart_hospital/voice_call/voice_call.dart';
-import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
+import 'package:smart_hospital/layout_pages/chat_text_message/message/video_call/video_call.dart';
+import 'package:smart_hospital/layout_pages/chat_text_message/message/voice_call/voice_call.dart';
+import 'package:smart_hospital/shared/cach_helper/cach_helper.dart';
+
 import 'package:zego_zimkit/zego_zimkit.dart';
 
-import '../../colors.dart';
-import '../../shared/constants.dart';
-import '../../shared/shared.dart';
-import '../../user_profile/user_profile_states.dart';
-import '../../video_call/video_call.dart';
+
+
 import 'package:connectivity/connectivity.dart';
 
-import '../home_cubit.dart';
+import '../../../shared/colors.dart';
+import '../../../shared/shared.dart';
+import '../../main_home/home_elements/user_profile/user_profile_cubit.dart';
+import '../../main_home/home_elements/user_profile/user_profile_states.dart';
+
+
+
 
 class NetworkUtils {
   static Future<bool> isNetworkConnected() async {
@@ -127,12 +130,12 @@ class _MessageState extends State<Message> {
       userName ='Dr.Mohamed Ali';
     }else{
       ZIMKit().connectUser(
-          id: UserProfileCubit.get(context).userModel!.email??'',
-          name:UserProfileCubit.get(context).userModel!.name??'',
-          avatarUrl: UserProfileCubit.get(context).userModel!.image??'',
+          id: UserProfileCubit.get(context).userModel?.email??'',
+          name:UserProfileCubit.get(context).userModel?.name??'',
+          avatarUrl: UserProfileCubit.get(context).userModel?.image??'',
       );
-      userId = UserProfileCubit.get(context).userModel!.email??'';
-      userName =UserProfileCubit.get(context).userModel!.name??'';
+      userId = UserProfileCubit.get(context).userModel?.email??'';
+      userName =UserProfileCubit.get(context).userModel?.name??'';
     }
 
 
@@ -316,7 +319,9 @@ class _MessageState extends State<Message> {
                     height: MediaQuery.of(context).size.height*0.4,
 
                     child:ZIMKitConversationListView(
-                      onPressed: (context, conversation, defaultAction) {
+                      onPressed: (context,
+                          conversation,
+                          defaultAction) {
                         try {
                           Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
@@ -360,9 +365,8 @@ class _MessageState extends State<Message> {
                             },
                           ));
                         } catch (e) {
-                          // Handle the error here
+
                           print('Error: $e');
-                          // You can show an error message to the user or take appropriate action.
                         }
                       },
                     ),
@@ -539,86 +543,6 @@ class _MessageState extends State<Message> {
   }
 
 }
-
-
-
-
-
-
-//
-//
-// Row(
-//
-// children: [
-// CircleAvatar(
-// radius: 40,
-// backgroundImage:NetworkImage(
-// model[index].image??'',
-// )
-// ),
-// SizedBox(
-// width: 2.w,
-// ),
-// Expanded(
-// child: Column(
-// crossAxisAlignment: CrossAxisAlignment.start,
-// mainAxisAlignment: MainAxisAlignment.spaceAround,
-// children: [
-// Text(model[index].name??'',
-// style: TextStyle(
-// fontSize: 18.sp,
-// fontWeight: FontWeight.w600
-// ),
-// maxLines: 1,
-// ),
-// Text('worem consectetur adipiscing edit worem consectetur adipiscing edit',
-// style: TextStyle(
-// fontSize: 10.sp,
-// fontWeight: FontWeight.w500,
-// color: mainColor,
-// ),
-// maxLines: 1,
-//
-// overflow: TextOverflow.ellipsis,
-// ),
-// ],
-// ),
-// ),
-// Spacer(),
-// Column(
-// mainAxisAlignment: MainAxisAlignment.spaceAround,
-// children: [
-// Text('12:50',
-// style: TextStyle(
-// fontSize: 10.sp,
-// fontWeight: FontWeight.w600
-// ),
-// ),
-// CircleAvatar(
-// radius: 10,
-// backgroundColor: Colors.blue,
-// child: Text('2',
-// style: TextStyle(
-// fontSize: 10.sp,
-// color: Colors.white
-// ),
-// ),
-// ),
-// ],
-// ),
-// ],
-// ),
-
-
-
-
-
-
-
-
-
-
-
 
 
 

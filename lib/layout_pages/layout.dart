@@ -2,17 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_hospital/colors.dart';
-import 'package:smart_hospital/layout_pages/Likes/Likes.dart';
-import 'package:smart_hospital/layout_pages/main_home/home.dart';
-import 'package:smart_hospital/sign_up/cubit.dart';
-import 'package:smart_hospital/user_profile/doctor_model.dart';
-import 'package:smart_hospital/user_profile/user_profile_cubit.dart';
-import 'package:smart_hospital/user_profile/user_profile_states.dart';
-import 'package:zego_zimkit/zego_zimkit.dart';
+import 'package:smart_hospital/shared/colors.dart';
 
-import 'home_cubit.dart';
-import 'home_states.dart';
+import 'main_home/home_cubit.dart';
+import 'main_home/home_elements/user_profile/user_profile_cubit.dart';
+import 'main_home/home_elements/user_profile/user_profile_states.dart';
+import 'main_home/home_states.dart';
 
 
 

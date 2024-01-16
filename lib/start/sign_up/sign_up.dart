@@ -1,33 +1,29 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_hospital/cach_helper/cach_helper.dart';
-import 'package:smart_hospital/colors.dart';
+import 'package:smart_hospital/shared/cach_helper/cach_helper.dart';
+import 'package:smart_hospital/shared/colors.dart';
 import 'package:smart_hospital/layout_pages/layout.dart';
-import 'package:smart_hospital/login/cubit.dart';
-import 'package:smart_hospital/login/states.dart';
-
 import 'package:smart_hospital/shared/shared.dart';
-import 'package:smart_hospital/shared/toast.dart';
-import 'package:smart_hospital/sign_up/sign_up.dart';
-import 'package:smart_hospital/user_profile/user_profile_cubit.dart';
-import 'package:zego_zimkit/zego_zimkit.dart';
+import 'package:smart_hospital/start/sign_up/states.dart';
+import '../../layout_pages/main_home/home_elements/user_profile/user_profile_cubit.dart';
+import '../../shared/toast.dart';
+import '../login/login.dart';
+import 'cubit.dart';
 
-import '../class_user_model.dart';
-import '../user_profile/doctor_model.dart';
 
-class Login extends StatefulWidget{
-   const Login({super.key});
+class SignUp extends StatefulWidget{
+   SignUp({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
+
+  final nameController = TextEditingController();
 
   final emailController = TextEditingController();
 
@@ -40,87 +36,21 @@ class _LoginState extends State<Login> {
     return Scaffold(
       backgroundColor: secondaryColor,
 
-      body: BlocConsumer<LoginCubit, LoginStates>(
-        listener: (BuildContext context,  state) {
-          if (state is LoginLoadingStates) {
+      body: BlocConsumer<RegisterCubit, RegisterStates>(
+        listener: (BuildContext context, Object? state) {
 
-            showToast(
-                msg: 'Check the network connection',
-                state: ToastStates.WARNING);
+          if (state is RegisterCreateUserSuccessStates) {
 
+              cachHelper.saveData(key: 'uId', value: state.uId);
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => Layout()),
+                      (route) => false);
 
-            // cachHelper.saveData(key: 'token', value: false);
-          }
-          else if (state is LoginSuccessStates) {
-
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) =>Layout()),
-                    (route) => false);
-              cachHelper.saveData(key: 'uId', value: state.uId).then((value) async {
-                final uId = FirebaseAuth.instance.currentUser?.uid;
-                if(
-                uId == "TT12nbU3WZV9nSUPBwUDXH8mmXJ2" ||
-                uId == "7v0UNsO4rrSfrf0POzqm1YF7Mo83" ||
-                uId == "m5EbPhM4IAOcFN9GdiMwwLABU7q2" ||
-                uId == "zXree2DBHZV0Nd6cnUWhyyG3UHu2" ||
-                uId == "oVhPBjNuSCWBGnlOGjfXc04lPHx2" ||
-                uId == "mM9UopgU2dWHvcKVLNrlPB4ujj93"
-                )
-                {
-
-
-
-                  UserProfileCubit.get(context).getDoctorData();
-                  DoctorModel? doctorModel;
-
-                  FirebaseFirestore.instance
-                      .collection('doctors')
-                      .doc(uId)
-                      .get()
-                      .then((value) async {
-                    doctorModel = DoctorModel.fromJson(value.data()!);
-
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) =>  Layout()),
-                            (route) => false);
-                    }).catchError((e) {
-                    print(e.toString());
-                  });
-                }else{
-                  UserProfileCubit.get(context).getUserData();
-                  UserModel? userModel;
-                  final uId = FirebaseAuth.instance.currentUser?.uid;
-                  FirebaseFirestore.instance
-                      .collection('users')
-                      .doc(uId)
-                      .get()
-                      .then((value) {
-                    userModel = UserModel.fromJson(value.data()!);
-
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => Layout()),
-                            (route) => false);
-
-                  }).catchError((e) {
-                    print(e.toString());
-                  });
-                }
-              }).catchError((error) {
-                print(error.toString());
-              });
-
+              UserProfileCubit.get(context).getUserData();
 
 
           }
-          else{
-            showToast(
-                msg: 'Check Your Email or Password',
-                state: ToastStates.ERORR);
-          }
-
 
         },
         builder: (BuildContext context, state) {
@@ -132,15 +62,31 @@ class _LoginState extends State<Login> {
                   mainAxisAlignment: MainAxisAlignment.center,
 
                   children: [
-                    Text('Welcome back',
+                    SizedBox(
+                      height: 6.h,
+                    ),
+                    Text('Join us to start searching',
                       style: TextStyle(
-                        fontSize: 26.sp,
+                        fontSize: 20.sp,
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
 
-
+                    Text('You can find your doctor with the specialty you want',
+                      style: TextStyle(
+                        fontSize: 10.sp,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Text('and book a medical consultation now!',
+                      style: TextStyle(
+                        fontSize: 10.sp,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
 
                     SizedBox(height: 10.h,),
 
@@ -235,7 +181,21 @@ class _LoginState extends State<Login> {
                       height: 6.h,
                     ),
 
-
+                    Padding(
+                        padding: const EdgeInsets.only(
+                            left: 20,
+                            right: 20
+                        ),
+                        child: textFormField(
+                            textEditingController: nameController,
+                            text: 'Name',
+                            textInputType: TextInputType.name,
+                            ifEmpty: 'Please Enter Your Name'
+                        )
+                    ),
+                    SizedBox(
+                      height: 3.h,
+                    ),
                     Padding(
                         padding: const EdgeInsets.only(
                             left: 20,
@@ -259,13 +219,12 @@ class _LoginState extends State<Login> {
                             right: 20
                         ),
                         child: textFormField(
-                            obscureText: LoginCubit.get(context).isNotVisible,
+                            obscureText: RegisterCubit.get(context).isNotVisible,
                             passwordSuffixIcon: IconButton(
                               onPressed: (){
-                                LoginCubit.get(context)
-                                    .changePasswordVisibility();
+                                RegisterCubit.get(context).changePasswordVisability();
                               },
-                              icon: Icon(LoginCubit.get(context).suffix,),
+                              icon:Icon(RegisterCubit.get(context).suffix,),
                             ),
                             textEditingController: passwordController,
                             text: 'Password',
@@ -274,57 +233,93 @@ class _LoginState extends State<Login> {
                         )
                     ),
                     SizedBox(
-                      height: 4.h,
+                      height: 1.h,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20,
+                          right: 20
+                      ),
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap:(){
+
+
+                               setState((){
+                                 termsColor = ! termsColor;
+                               });
+
+                            },
+                            child: CircleAvatar(
+                              radius: 10,
+                              backgroundColor: termsColor ? mainColor :Colors.grey.withOpacity(0.5),
+                            ),
+
+                          ),
+                          SizedBox(
+                            width: 4.w,
+                          ),
+                          Expanded(
+                            child: Text(
+                              'I agree with the Terms of Service & Privacy Policy',
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.w500
+
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 2.h,
                     ),
 
-
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 30,
-                              right: 30
-                          ),
-                          child:ConditionalBuilder(
-                            condition: state != LoginLoadingStates,
-                            builder: (BuildContext context) => Container(
-                              width: double.infinity,
-                              height: MediaQuery.of(context).size.height*0.06,
-                              child: MaterialButton(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    side: BorderSide(color: Colors.white24)),
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    LoginCubit.get(context).userLogin(
-                                      email: emailController.text,
-                                      password: passwordController.text,
-                                      context: context,
-                                    );
-                                  }
-                                },
-                                color: mainColor,
-                                textColor:
-                                Theme.of(context).scaffoldBackgroundColor,
-                                child: Text("Login",
-                                    style: TextStyle(
-                                        color: secondaryColor ,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.bold
-                                    ),),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: ConditionalBuilder(
+                        condition: state != RegisterLoadingStates,
+                        builder: (BuildContext context) => Container(
+                          width: double.infinity,
+                          height:MediaQuery.of(context).size.height*0.06,
+                          child: MaterialButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.circular(15.0),
+                                side:
+                                BorderSide(color: Colors.white24)),
+                            onPressed: () {
+                             if(termsColor == true){ if (_formKey.currentState!.validate()) {
+                                RegisterCubit.get(context).userRegister(
+                                  name: nameController.text,
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  context: context,
+                                );
+                              }} else {
+                               showToast(
+                                   msg: 'Please agree on the Terms First',
+                                   state: ToastStates.WARNING);
+                             }
+                            },
+                            color: mainColor,
+                            textColor: Theme.of(context)
+                                .scaffoldBackgroundColor,
+                            child: Text("Sign up",
+                             style: TextStyle(
+                                  color: secondaryColor,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.bold
                               ),
-                            ),
-                            fallback: (BuildContext context) =>
-                                CircularProgressIndicator(),
-                          ),
+                          ),),
                         ),
-                        TextButton(onPressed: (){}, child: Text('Forgot password',
-                          style: TextStyle(
-                              fontSize: 10.sp,
-                              fontWeight: FontWeight.w500
-                          ),
-                        ))
-                      ],
+                        fallback: (BuildContext context) =>
+                            CircularProgressIndicator(),
+                      ),
                     ),
                     SizedBox(
                       height: 2.h,
@@ -333,7 +328,7 @@ class _LoginState extends State<Login> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Don\'t have an account?',
+                        Text('Have an account?',
                           style: TextStyle(
                               color: Colors.grey,
                               fontWeight: FontWeight.w500
@@ -341,15 +336,10 @@ class _LoginState extends State<Login> {
                         ),
                         TextButton(
                           onPressed: (){
-
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUp()),
-                                    (route) => false);
-
+                            Navigator.pushAndRemoveUntil(context,
+                                MaterialPageRoute(builder: (context) => Login()), (route) => false);
                           },
-                          child: Text('Sign up',
+                          child: Text('Log in',
                             style: TextStyle(
                                 fontWeight: FontWeight.w500
                             ),
@@ -363,7 +353,7 @@ class _LoginState extends State<Login> {
                 ),
               ),
             ),
-          ) ;
+          );
         },
       ),
     );

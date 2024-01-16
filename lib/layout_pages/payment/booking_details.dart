@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_hospital/colors.dart';
+import 'package:smart_hospital/shared/colors.dart';
 
 import 'default_data.dart';
 
@@ -50,7 +50,9 @@ class BookingDetails extends StatelessWidget {
                       ),
                     ),
                     GooglePayButton(
-                      paymentConfiguration: PaymentConfiguration.fromJsonString(defaultGooglePay),
+                      paymentConfiguration: PaymentConfiguration.fromJsonString(
+                          defaultGooglePay,
+                      ),
                       paymentItems: _paymentItems,
                       type: GooglePayButtonType.pay,
                       margin: const EdgeInsets.only(top: 15.0),
