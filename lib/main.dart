@@ -23,9 +23,9 @@ main() async {
   );
 
   ZIMKit().init(
-    appID: 1621021754, // your appId
+    appID: 417540252, // your appId
     appSign:
-        "7d6a1cc37213e3b0067949e2da9d6a6ab9a78d354d61f25a91d85b51d589e483", // your appSign
+        "0c5a18de41de6ec5c75ae692465e7bdbce349cd0ffff861b2298b1a7b20a196d", // your appSign
   );
 
   await cachHelper.init();

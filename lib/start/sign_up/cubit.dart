@@ -16,7 +16,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
 
   static RegisterCubit get(context) => BlocProvider.of(context);
 
-  LoginModel? loginModel;
+
 
 
 
